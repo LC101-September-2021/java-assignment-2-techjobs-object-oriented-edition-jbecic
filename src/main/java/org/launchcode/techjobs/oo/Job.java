@@ -38,7 +38,7 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return id == job.id && Objects.equals(name, job.name) && Objects.equals(employer, job.employer) && Objects.equals(location, job.location) && Objects.equals(positionType, job.positionType) && Objects.equals(coreCompetency, job.coreCompetency);
+        return getId() == job.getId();
     }
 
     @Override
@@ -92,5 +92,58 @@ public class Job {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        String firstLine = "\n";
+        String lastLine = "\n";
+        String name;
+        String employer;
+        String location;
+        String positionType;
+        String coreCompetency;
+        //String[] arr = {getName(), getEmployer().getValue(), getLocation().getValue(), getPositionType().getValue(), getCoreCompetency().getValue()};
+
+        if (getName() != null && getName() != "") {
+            name = this.name;
+        } else {
+            name = "Data not available";
+        }
+        if (getEmployer().getValue() != null && getEmployer().getValue() != "") {
+            employer = this.employer.getValue();
+        } else {
+            employer = "Data not available";
+        }
+        if (getLocation().getValue() != null && getLocation().getValue() != "") {
+            location = this.location.getValue();
+        } else {
+            location = "Data not available";
+        }
+        if (getPositionType().getValue() != null && getPositionType().getValue() != "") {
+            positionType = this.positionType.getValue();
+        } else {
+            positionType = "Data not available";
+        }
+        if (getCoreCompetency().getValue() != null && getCoreCompetency().getValue() != "") {
+            coreCompetency = this.coreCompetency.getValue();
+        } else {
+            coreCompetency = "Data not available";
+        }
+
+        String finalStr = firstLine +
+                "ID: " + id + "\n" +
+                "Name: " + name + "\n" +
+                "Employer: " + employer + "\n" +
+                "Location: " + location + "\n" +
+                "Position Type: " + positionType + "\n" +
+                "Core Competency: " + coreCompetency +
+                lastLine;
+
+        if (name.equals("Data not available") && employer.equals("Data not available") && location.equals("Data not available") && positionType.equals("Data not available") && coreCompetency.equals("Data not available")) {
+            finalStr = "OOPS! This job does not seem to exist.";
+        }
+
+        return finalStr;
     }
 }
