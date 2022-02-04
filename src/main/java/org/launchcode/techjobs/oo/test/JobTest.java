@@ -34,6 +34,7 @@ public class JobTest {
     public void testJobConstructorSetsAllFields() {
         Job job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
+        assertEquals(3, job3.getId(), 0.1);
         assertTrue(job3.getName() == "Product tester");
         assertThat(job3.getEmployer(), instanceOf(Employer.class));
         assertThat(job3.getLocation(), instanceOf(Location.class));
