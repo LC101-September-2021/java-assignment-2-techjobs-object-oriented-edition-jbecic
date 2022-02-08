@@ -16,10 +16,134 @@ public class Job {
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
+    public Job() {
+        id = nextId;
+        nextId++;
+    }
+
+    public Job(String aName, Employer anEmployer, Location aLocation, PositionType aPositionType, CoreCompetency aCoreCompetency) {
+        this();
+        this.name = aName;
+        this.employer = anEmployer;
+        this.location = aLocation;
+        this.positionType = aPositionType;
+        this.coreCompetency = aCoreCompetency;
+    }
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return getId() == job.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, employer, location, positionType, coreCompetency);
+    }
+
+
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public PositionType getPositionType() {
+        return positionType;
+    }
+
+    public void setPositionType(PositionType positionType) {
+        this.positionType = positionType;
+    }
+
+    public CoreCompetency getCoreCompetency() {
+        return coreCompetency;
+    }
+
+    public void setCoreCompetency(CoreCompetency coreCompetency) {
+        this.coreCompetency = coreCompetency;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        String firstLine = "\n";
+        String lastLine = "\n";
+        String name;
+        String employer;
+        String location;
+        String positionType;
+        String coreCompetency;
+        //String[] arr = {getName(), getEmployer().getValue(), getLocation().getValue(), getPositionType().getValue(), getCoreCompetency().getValue()};
+
+        if (getName() != null && getName() != "") {
+            name = this.name;
+        } else {
+            name = "Data not available";
+        }
+        if (getEmployer().getValue() != null && getEmployer().getValue() != "") {
+            employer = this.employer.getValue();
+        } else {
+            employer = "Data not available";
+        }
+        if (getLocation().getValue() != null && getLocation().getValue() != "") {
+            location = this.location.getValue();
+        } else {
+            location = "Data not available";
+        }
+        if (getPositionType().getValue() != null && getPositionType().getValue() != "") {
+            positionType = this.positionType.getValue();
+        } else {
+            positionType = "Data not available";
+        }
+        if (getCoreCompetency().getValue() != null && getCoreCompetency().getValue() != "") {
+            coreCompetency = this.coreCompetency.getValue();
+        } else {
+            coreCompetency = "Data not available";
+        }
+
+        String finalStr = firstLine +
+                "ID: " + id + "\n" +
+                "Name: " + name + "\n" +
+                "Employer: " + employer + "\n" +
+                "Location: " + location + "\n" +
+                "Position Type: " + positionType + "\n" +
+                "Core Competency: " + coreCompetency +
+                lastLine;
+
+        if (name.equals("Data not available") && employer.equals("Data not available") && location.equals("Data not available") && positionType.equals("Data not available") && coreCompetency.equals("Data not available")) {
+            finalStr = "OOPS! This job does not seem to exist.";
+        }
+
+        return finalStr;
+    }
 }
