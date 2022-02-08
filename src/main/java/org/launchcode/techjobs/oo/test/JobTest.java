@@ -1,7 +1,9 @@
 package org.launchcode.techjobs.oo.test;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.launchcode.techjobs.oo.*;
@@ -16,11 +18,11 @@ import static org.junit.Assert.*;
  */
 @RunWith(JUnit4.class)
 public class JobTest {
-    Job job1;
-    Job job2;
+    static Job job1;
+    static Job job2;
 
-    @Before
-    public void createJobObjects() {
+    @BeforeClass
+    public static void createJobObjects() {
         job1 = new Job();
         job2 = new Job();
     }
@@ -35,7 +37,7 @@ public class JobTest {
         Job job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
         assertEquals(3, job3.getId(), 0.1);
-        assertTrue(job3.getName() == "Product tester");
+        assertTrue(job3.getName().equals("Product tester"));
         assertThat(job3.getEmployer(), instanceOf(Employer.class));
         assertThat(job3.getLocation(), instanceOf(Location.class));
         assertThat(job3.getPositionType(), instanceOf(PositionType.class));
